@@ -24,7 +24,7 @@ $k = 1.36;
 $threshold = atan(($t + 50 / ($t + 1)) / 600 + $k) * 2 / pi() * 100;
 if ($complete < 25)
 {
-	$diff_state = L10N_NOT_TRANSLATED;
+	$diff_state = L10N_NOT_FINISHED;
 }
 elseif ($orig / $ru_words > 2 || $complete < $threshold)
 {

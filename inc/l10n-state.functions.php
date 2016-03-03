@@ -31,7 +31,7 @@ function cot_word_count($string, $skip_latin = false, $min_word_len = 3)
 	$string = preg_replace('/[^\w\s]/u', ' ', $string);
 	if ($skip_latin)
 	{
-		$string = preg_replace('/\b[a-z]+\b/i', '', $string);
+		$string = preg_replace('/\b[a-z\d\_]+\b/i', '', $string);
 	}
 	$string = preg_replace('/(\b\S{1,' . $wl . '}\b)/u', '', $string);
 	$num = preg_match_all('/\s+/', trim($string));
@@ -130,7 +130,7 @@ function l10n_check_common(&$pag_data, $details = null)
 			$lang_specific_file = cot_incfile('l10n-state', 'plug', $l10n_lang);
 			if ($l10n_lang && is_file($lang_specific_file))
 			{
-				require_once $lang_specific_file;
+				include $lang_specific_file;
 			}
 			else
 			{
@@ -268,7 +268,6 @@ function l10n_msg($pag_data, $all_msg = false){
 	switch ($state['state']) {
 		case L10N_GOOD:
 		case L10N_SUFFICIENT:
-		case L10N_NOT_TRANSLATED:
 			if ($all_msg) $message = cot_rc("l10n_state_$msg_id");
 			break;
 		case L10N_OUTDATED:
